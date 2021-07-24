@@ -12,7 +12,8 @@ namespace LambdaExpressions
             List<Person> people = new List<Person>();
             AddDetails(people);
             RetrieveAge(people);
-            RetrieveAverage(people);
+            RetrieveDetails(people);
+            AverageAge(people);
         }
 
         public static void AddDetails(List<Person> people)
@@ -44,7 +45,7 @@ namespace LambdaExpressions
            
         }
 
-        public static void RetrieveAverage(List<Person> people)
+        public static void RetrieveDetails(List<Person> people)
         {
             if (people.Count <= 0)
             {
@@ -58,6 +59,22 @@ namespace LambdaExpressions
                     Console.WriteLine("Name :" + person.Name + "Age :" + person.Age);
                 }
             }
+        }
+
+        public static void AverageAge(List<Person> people)
+        {
+            AddDetails(people);
+            if (people.Count < 0)
+            {
+                Console.WriteLine("Empty, No data found");
+            }
+            else
+            {
+                double avg = people.Average(b => b.Age);
+                Console.WriteLine("Average of age from list is :" + avg);
+            }
+
+           
         }
 
 
