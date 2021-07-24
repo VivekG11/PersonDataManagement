@@ -8,10 +8,10 @@ namespace LambdaExpressions
     {
          static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Details Of persons....");
             List<Person> people = new List<Person>();
             AddDetails(people);
-            RetrieveAge( people);
+           
 
            
         }
@@ -27,22 +27,11 @@ namespace LambdaExpressions
 
             foreach(Person i in people)
             {
-              //  Console.WriteLine("Details are :"+i.SSN+","+i.Name+","+i.Address+","+i.Age);
+             
                 Console.WriteLine("Details are {0} , {1} , {2}, {3} .",i.SSN,i.Name,i.Address,i.Age);
             }
 
           
-        }
-         public static void RetrieveAge(List<Person> people )
-        {
-            foreach (Person i in people.FindAll (a => (a.Age < 60)).Take(2).ToList()) 
-            {
-                Console.WriteLine("Name :"+i.Name + "Age :"+i.Age);
-            }
-            foreach (Person person in people.FindAll(b => (b.Age > 12 && b.Age < 50)).ToList())
-            {
-                Console.WriteLine("Name :" + person.Name + "Age :" + person.Age);
-            }
         }
         
     }
