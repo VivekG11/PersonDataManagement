@@ -52,6 +52,7 @@ namespace LambdaExpressions
             }
             else
             {
+                Console.WriteLine("People between 12 and 50 are");
                 foreach (Person person in people.FindAll(b => (b.Age > 12 && b.Age < 50)).ToList())
                 {
                     Console.WriteLine("Name :" + person.Name + "Age :" + person.Age);
