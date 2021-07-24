@@ -6,14 +6,13 @@ namespace LambdaExpressions
 {
     public class Program
     {
-         static void Main(string[] args)
+        static void Main(string[] args)
         {
             Console.WriteLine("Details Of persons....");
             List<Person> people = new List<Person>();
             AddDetails(people);
-           
+            RetrieveAge(people);
 
-           
         }
 
         public static void AddDetails(List<Person> people)
@@ -25,14 +24,23 @@ namespace LambdaExpressions
             people.Add(new Person("6672", "Guna", "Vizag", 26));
 
 
-            foreach(Person i in people)
+            foreach (Person i in people)
             {
-             
-                Console.WriteLine("Details are {0} , {1} , {2}, {3} .",i.SSN,i.Name,i.Address,i.Age);
+
+                Console.WriteLine("Details are {0} , {1} , {2}, {3} .", i.SSN, i.Name, i.Address, i.Age);
             }
 
-          
+
         }
-        
+
+        public static void RetrieveAge(List<Person> people)
+        {
+            //Displaying persons under condition using lambda expression
+            foreach (Person i in people.FindAll(a => (a.Age < 60)).Take(2).ToList())
+            {
+                Console.WriteLine("Name :" + i.Name + "Age :" + i.Age);
+            }
+
+        }
     }
 }
