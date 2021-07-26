@@ -10,10 +10,11 @@ namespace LambdaExpressions
         {
             Console.WriteLine("Details Of persons....");
             List<Person> people = new List<Person>();
-            AddDetails(people);
-            RetrieveAge(people);
-            RetrieveDetails(people);
-            AverageAge(people);
+           // AddDetails(people);
+            //RetrieveAge(people);
+            //RetrieveDetails(people);
+            //AverageAge(people);
+            Check(people);
         }
 
         public static void AddDetails(List<Person> people)
@@ -42,7 +43,7 @@ namespace LambdaExpressions
                 Console.WriteLine("Name :" + i.Name + "Age :" + i.Age);
             }
 
-           
+
         }
 
         public static void RetrieveDetails(List<Person> people)
@@ -74,10 +75,25 @@ namespace LambdaExpressions
                 Console.WriteLine("Average of age from list is :" + avg);
             }
 
-           
+
         }
 
-
+        public static void Check(List<Person> people)
+        {
+            AddDetails(people);
+            Console.WriteLine("Enter name you want to search :");
+            string name = Console.ReadLine();
+            var res = people.Find(c => c.Name.Equals(name));
+            if(res == null)
+            {
+                Console.WriteLine("Entered name does not exist in the list");
+            }
+            else
+            {
+                Console.WriteLine("Entered name present in the list .");
+                
+            }
+        }
 
     }
 }
