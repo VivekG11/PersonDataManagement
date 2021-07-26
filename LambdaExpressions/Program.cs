@@ -15,7 +15,8 @@ namespace LambdaExpressions
             //RetrieveDetails(people);
             //AverageAge(people);
            // Check(people);
-            SkipRecord(people);
+            //SkipRecord(people);
+            DelRecord(people);
         }
 
         public static void AddDetails(List<Person> people)
@@ -107,5 +108,28 @@ namespace LambdaExpressions
             }
         }
 
+        public static void DelRecord(List<Person> people)
+        {
+            AddDetails(people);
+            Console.WriteLine("Enter name you want to delete :");
+            string delName = Console.ReadLine();
+            //using lamba expression to find whther the entered name is present in the list or not
+            var match = people.Find(d => d.Name.Equals(delName));
+            if(match == null)
+            {
+                Console.WriteLine("Entered name is not in the list");
+            }
+            //If present removing respective details from the list using remove method
+            else
+            {
+                people.Remove(match);
+                Console.WriteLine("List after updating :");
+                foreach(Person person in people)
+                {
+                    Console.WriteLine(person.Name);
+                }
+            }
+            
+        }
     }
 }
