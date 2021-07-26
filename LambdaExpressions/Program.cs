@@ -14,14 +14,15 @@ namespace LambdaExpressions
             //RetrieveAge(people);
             //RetrieveDetails(people);
             //AverageAge(people);
-            Check(people);
+           // Check(people);
+            SkipRecord(people);
         }
 
         public static void AddDetails(List<Person> people)
         {
             people.Add(new Person("1234", "Vivek", "LB Nagar", 29));
             people.Add(new Person("3421", "Aditya", "Kukatpally", 37));
-            people.Add(new Person("1129", "Vinay", "Chennai", 54));
+            people.Add(new Person("1129", "Vinay", "Chennai", 64));
             people.Add(new Person("3901", "Pavani", "Kadapa", 35));
             people.Add(new Person("6672", "Guna", "Vizag", 26));
 
@@ -92,6 +93,17 @@ namespace LambdaExpressions
             {
                 Console.WriteLine("Entered name present in the list .");
                 
+            }
+        }
+        //uc6
+        public static void SkipRecord(List<Person> people)
+        {
+            AddDetails(people);
+            //iterating list & using lambda expression to filter persons who are abou 60
+            foreach(Person person in people.FindAll(x => x.Age>=60))
+            {
+                Console.WriteLine("List of persons above age 60 are :");
+                Console.WriteLine(person.Name+" : "+person.Age);
             }
         }
 
