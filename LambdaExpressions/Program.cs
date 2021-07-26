@@ -6,33 +6,152 @@ namespace LambdaExpressions
 {
     public class Program
     {
-         static void Main(string[] args)
+        static void Main(string[] args)
         {
             Console.WriteLine("Details Of persons....");
             List<Person> people = new List<Person>();
-            AddDetails(people);
-           
-
-           
+            Console.WriteLine("Enter an option :");
+            int option = Convert.ToInt32(Console.ReadLine());
+            switch (option)
+            {
+                case 1:
+                    AddDetails(people);
+                    break;
+                case 2:
+                    RetrieveAge(people);
+                    break;
+                case 3:
+                    RetrieveDetails(people);
+                    break;
+                case 4:
+                    AverageAge(people);
+                    break;
+                case 5:
+                    Check(people);
+                    break;
+                case 6:
+                    SkipRecord(people);
+                    break;
+                case 7:
+                    DelRecord(people);
+                    break;
+                default:
+                    Console.WriteLine("Enter valid Option :");
+                    break;
+            } 
         }
 
         public static void AddDetails(List<Person> people)
         {
             people.Add(new Person("1234", "Vivek", "LB Nagar", 29));
             people.Add(new Person("3421", "Aditya", "Kukatpally", 37));
-            people.Add(new Person("1129", "Vinay", "Chennai", 54));
+            people.Add(new Person("1129", "Vinay", "Chennai", 64));
             people.Add(new Person("3901", "Pavani", "Kadapa", 35));
             people.Add(new Person("6672", "Guna", "Vizag", 26));
 
 
-            foreach(Person i in people)
+            foreach (Person i in people)
             {
-             
-                Console.WriteLine("Details are {0} , {1} , {2}, {3} .",i.SSN,i.Name,i.Address,i.Age);
+
+                Console.WriteLine("Details are {0} , {1} , {2}, {3} .", i.SSN, i.Name, i.Address, i.Age);
             }
 
-          
+
         }
-        
+
+        public static void RetrieveAge(List<Person> people)
+        {
+            //Displaying persons under condition using lambda expression
+            foreach (Person i in people.FindAll(a => (a.Age < 60)).Take(2).ToList())
+            {
+                Console.WriteLine("Name :" + i.Name + "Age :" + i.Age);
+            }
+
+
+        }
+
+        public static void RetrieveDetails(List<Person> people)
+        {
+            if (people.Count <= 0)
+            {
+                Console.WriteLine("No data found ......");
+            }
+            else
+            {
+                Console.WriteLine("People between 12 and 50 are");
+                foreach (Person person in people.FindAll(b => (b.Age > 12 && b.Age < 50)).ToList())
+                {
+                    Console.WriteLine("Name :" + person.Name + "Age :" + person.Age);
+                }
+            }
+        }
+
+        public static void AverageAge(List<Person> people)
+        {
+            AddDetails(people);
+            if (people.Count < 0)
+            {
+                Console.WriteLine("Empty, No data found");
+            }
+            else
+            {
+                double avg = people.Average(b => b.Age);
+                Console.WriteLine("Average of age from list is :" + avg);
+            }
+
+
+        }
+
+        public static void Check(List<Person> people)
+        {
+            AddDetails(people);
+            Console.WriteLine("Enter name you want to search :");
+            string name = Console.ReadLine();
+            var res = people.Find(c => c.Name.Equals(name));
+            if(res == null)
+            {
+                Console.WriteLine("Entered name does not exist in the list");
+            }
+            else
+            {
+                Console.WriteLine("Entered name present in the list .");
+                
+            }
+        }
+        //uc6
+        public static void SkipRecord(List<Person> people)
+        {
+            AddDetails(people);
+            //iterating list & using lambda expression to filter persons who are abou 60
+            foreach(Person person in people.FindAll(x => x.Age>=60))
+            {
+                Console.WriteLine("List of persons above age 60 are :");
+                Console.WriteLine(person.Name+" : "+person.Age);
+            }
+        }
+
+        public static void DelRecord(List<Person> people)
+        {
+            AddDetails(people);
+            Console.WriteLine("Enter name you want to delete :");
+            string delName = Console.ReadLine();
+            //using lamba expression to find whther the entered name is present in the list or not
+            var match = people.Find(d => d.Name.Equals(delName));
+            if(match == null)
+            {
+                Console.WriteLine("Entered name is not in the list");
+            }
+            //If present removing respective details from the list using remove method
+            else
+            {
+                people.Remove(match);
+                Console.WriteLine("List after updating :");
+                foreach(Person person in people)
+                {
+                    Console.WriteLine(person.Name);
+                }
+            }
+            
+        }
     }
 }
